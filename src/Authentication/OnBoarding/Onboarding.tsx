@@ -41,10 +41,34 @@ const styles = StyleSheet.create({
 })
 
 const slides = [
-  { label: 'Relaxed', subTitle: 'Find Your Outfits', description: 'Confused about your outfit? Dont worry! Find the best outfit here!', color: '#BFEAF5', picture: require('../../assets/1.png') },
-  { label: 'Playful', subTitle: 'Hear it Fisrt, Wear it First', description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ide',  color: '#BEECC4', picture: require('../../assets/2.png') },
-  { label: 'Excentric', subTitle: 'Your Style, Your Way', description: 'Create your individual & unique style and look amazing everyday',  color: '#FFE4D9', picture: require('../../assets/3.png') },
-  { label: 'Funky', subTitle: 'Look Good, Feel Good', description: 'Discover the latest trends in fashion and explore your personally',  color: '#FFDDDD', picture: require('../../assets/4.png') },
+  { 
+    label: 'Relaxed', 
+    subTitle: 'Find Your Outfits', 
+    description: 'Confused about your outfit? Dont worry! Find the best outfit here!', 
+    color: '#BFEAF5', 
+    picture: require('../../assets/1.png')
+  },
+  { 
+    label: 'Playful', 
+    subTitle: 'Hear it Fisrt, Wear it First', 
+    description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ide',  
+    color: '#BEECC4', 
+    picture: require('../../assets/2.png')
+  },
+  { 
+    label: 'Excentric', 
+    subTitle: 'Your Style, Your Way', 
+    description: 'Create your individual & unique style and look amazing everyday',  
+    color: '#FFE4D9', 
+    picture: require('../../assets/3.png')
+  },
+  { 
+    label: 'Funky', 
+    subTitle: 'Look Good, Feel Good', 
+    description: 'Discover the latest trends in fashion and explore your personally',  
+    color: '#FFDDDD', 
+    picture: require('../../assets/4.png')
+  },
 ]
 
 const OnBoarding = () => {
