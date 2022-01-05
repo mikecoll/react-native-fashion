@@ -1,22 +1,51 @@
 import React from "react";
-import { View, Text } from "react-native";
-import Animated, { sub } from 'react-native-reanimated';
+import { View, Text, StyleSheet } from "react-native";
+import Animated from 'react-native-reanimated';
+
+import {Button} from '../../components';
 
 interface SubSlideProps {
   subTitle: string;
   description: string;
-  latest?: boolean;
+  last?: boolean;
   x: Animated.Node<number>;
+  onPress: () => void;
 }
 
 const SubSlide: React.FC<SubSlideProps> = (props) => {
-  const {subTitle, description, latest, x} = props;
+  const {subTitle, description, last, x, onPress} = props;
   return (
-    <View>
-      <Text>{subTitle}</Text>
-      <Text>{description}</Text>
+    <View style={styles.container}>
+      <Text style={styles.subTitle}>{subTitle}</Text>
+      <Text style={styles.description}>{description}</Text>
+      <Button 
+        label={last ? "Let's go started" : "Next"} 
+        variant={last ? "primary" : "default"}
+        {...{onPress}}
+      />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 44
+  },
+  subTitle: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: '#0C0D34'
+  },
+  description: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: '#0C0D34',
+    textAlign: 'center',
+    marginVertical: 12
+  }
+})
 
 export default SubSlide
