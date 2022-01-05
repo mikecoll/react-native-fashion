@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@shopify/restyle": "^1.6.1",
     "expo": "~44.0.0",
     "expo-asset": "~8.4.5",
     "expo-constants": "~13.0.0",

@@ -1,7 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
 import Animated, {Extrapolate, interpolateNode} from 'react-native-reanimated'
-// import {interpolate} from 'react-native-redash/lib/module/v1';
 
 interface DotProps {
   index: number;
