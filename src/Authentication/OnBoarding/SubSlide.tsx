@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Animated from 'react-native-reanimated';
 
 import {Button} from '../../components';
+
+const {width} = Dimensions.get("window");
 
 interface SubSlideProps {
   subTitle: string;
@@ -29,10 +31,10 @@ const SubSlide: React.FC<SubSlideProps> = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 44
+    padding: 44,
+    width,
   },
   subTitle: {
     fontWeight: 'bold',
