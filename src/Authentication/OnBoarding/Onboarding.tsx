@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import {View, StyleSheet, Dimensions} from 'react-native';
-import Animated from "react-native-reanimated";
+import Animated, {multiply} from "react-native-reanimated";
 import {
   useValue,
   interpolateColor,
@@ -8,6 +8,7 @@ import {
 } from "react-native-redash/lib/module/v1";
 
 import Slide, {SLIDER_HEIGHT} from "./Slide";
+import SubSlide from "./SubSlide";
 
 const BORDER_RADIUS = 75;
 const {width} = Dimensions.get("window");
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1, 
     backgroundColor: 'white', 
-    borderTopLeftRadius: BORDER_RADIUS
+    borderTopLeftRadius: BORDER_RADIUS,
+    flexDirection: 'row'
   }
 })
 
@@ -41,6 +43,7 @@ const slides = [
 const OnBoarding = () => {
   const x = useValue(0);
   const onScroll = onScrollEvent({ x });
+  const scroll = useRef<Animated.ScrollView>(null);
 
   const backgroundColor = interpolateColor(x, {
     inputRange: slides.map((_, i) => i * width),
@@ -49,8 +52,9 @@ const OnBoarding = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.slider, { backgroundColor: backgroundColor }]}>
-        <Animated.ScrollView 
+      <Animated.View style={[styles.slider, { backgroundColor }]}>
+        <Animated.ScrollView
+          ref={scroll}
           horizontal 
           snapToInterval={width} 
           decelerationRate={"fast"}
@@ -66,11 +70,27 @@ const OnBoarding = () => {
       </Animated.View>
       <View style={styles.footer}>
         <Animated.View style={{...StyleSheet.absoluteFillObject, backgroundColor: backgroundColor }} />
-        <View style={styles.footerContent}>
+        <Animated.View 
+          style={
+            [styles.footerContent, { width: width * slides.length, transform: [{ translateX: multiply(x, -1) }] }]
+          }
+        >
           {slides.map(({subTitle, description}, index) => (
-            <SubSlide key={index} last={index === slides.length - 1} {...{subTitle, description, x}} >
+            <SubSlide
+              onPress={() => {
+                if (scroll.current) {
+                  scroll.current.scrollTo({
+                    x: width * (index + 1),
+                    animated: true,
+                  })
+                }
+              }}
+              key={index} 
+              last={index === slides.length - 1} 
+              {...{subTitle, description, x}}
+            />
           ))}
-        </View>
+        </Animated.View>
       </View>
     </View>
   )
