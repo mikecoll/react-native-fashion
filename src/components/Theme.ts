@@ -5,6 +5,7 @@ const theme = createTheme({
   colors: {
     primary: "#2CB9B0",
     title: '#0C0D34',
+    button: '#0C0D34',
     text: 'rgba(12, 13, 52, 0.7)',
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',

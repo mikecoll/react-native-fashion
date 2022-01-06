@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from '@shopify/restyle';
 
 import { OnBoarding, Welcome } from './src/Authentication';
-import { theme } from './src/components';
+import { theme, AppRoutes } from './src/components';
 
-const AuthenticationStack = createNativeStackNavigator();
+const AuthenticationStack = createNativeStackNavigator<AppRoutes>();
 const AuthenticationNavigation = () => {
   return (
     <AuthenticationStack.Navigator

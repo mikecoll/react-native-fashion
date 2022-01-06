@@ -95,7 +95,7 @@ const slides = [
   },
 ]
 
-const OnBoarding = () => {
+const OnBoarding = ({ navigation }) => {
   const { x, scrollHandler } = useScrollHandler();
   const scroll = useRef<Animated.ScrollView>(null);
 
@@ -148,21 +148,25 @@ const OnBoarding = () => {
             width: width * slides.length,
             transform: [{ translateX: multiply(x, -1) }]
           }}>
-            {slides.map(({subTitle, description}, index) => (
-              <SubSlide
-                onPress={() => {
-                  if (scroll.current) {
-                    scroll.current.scrollTo({
-                      x: width * (index + 1),
-                      animated: true,
-                    })
-                  }
-                }}
-                key={index} 
-                last={index === slides.length - 1} 
-                {...{subTitle, description, x}}
-              />
-            ))}
+            {slides.map(({subTitle, description}, index) => {
+              const last = index === slides.length - 1;
+              return (
+                <SubSlide
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate("Welcome");
+                    } else if (scroll.current) {
+                      scroll.current.scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      })
+                    }
+                  }}
+                  key={index} 
+                  {...{subTitle, description, x, last}}
+                />
+              )
+            })}
           </Animated.View>
         </View>
       </View>
