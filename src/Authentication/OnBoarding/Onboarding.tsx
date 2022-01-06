@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
-import {View, StyleSheet, Dimensions} from 'react-native';
-import Animated, {divide, multiply} from "react-native-reanimated";
+import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import Animated, {divide, multiply, interpolateNode, Extrapolate} from "react-native-reanimated";
 import {
   interpolateColor,
   useScrollHandler
 } from "react-native-redash/lib/module/v1";
 
-import Slide, {SLIDER_HEIGHT, BORDER_RADIUS} from "./Slide";
+import Slide, {SLIDER_HEIGHT} from "./Slide";
 import SubSlide from "./SubSlide";
 import Dot from './Dot';
+import {theme} from '../../components'
 
 const {width} = Dimensions.get("window");
 
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDER_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS
+    borderBottomRightRadius: theme.borderRadii.xl
   },
   footer: {
     flex: 1
@@ -27,12 +28,19 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1, 
     backgroundColor: 'white', 
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: theme.borderRadii.xl,
     flexDirection: 'row'
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    borderBottomRightRadius: theme.borderRadii.xl,
+    overflow: 'hidden',
   },
   pageination: {
     ...StyleSheet.absoluteFillObject, 
-    height: BORDER_RADIUS, 
+    height: theme.borderRadii.xl, 
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -46,28 +54,44 @@ const slides = [
     subTitle: 'Find Your Outfits', 
     description: 'Confused about your outfit? Dont worry! Find the best outfit here!', 
     color: '#BFEAF5', 
-    picture: require('../../assets/1.png')
+    picture: {
+      uri: require('../../assets/1.png'),
+      width: 2513,
+      height:3583
+    }
   },
   { 
     label: 'Playful', 
     subTitle: 'Hear it Fisrt, Wear it First', 
     description: 'Hating the clothes in your wardrobe? Explore hundreds of outfit ide',  
     color: '#BEECC4', 
-    picture: require('../../assets/2.png')
+    picture: {
+      uri: require('../../assets/2.png'),
+      width: 2791,
+      height: 3744
+    }
   },
   { 
     label: 'Excentric', 
     subTitle: 'Your Style, Your Way', 
     description: 'Create your individual & unique style and look amazing everyday',  
     color: '#FFE4D9', 
-    picture: require('../../assets/3.png')
+    picture: {
+      uri: require('../../assets/3.png'),
+      width: 2738,
+      height: 3244
+    }
   },
   { 
     label: 'Funky', 
     subTitle: 'Look Good, Feel Good', 
     description: 'Discover the latest trends in fashion and explore your personally',  
     color: '#FFDDDD', 
-    picture: require('../../assets/4.png')
+    picture: {
+      uri: require('../../assets/4.png'),
+      width: 1757,
+      height: 2551,
+    }
   },
 ]
 
@@ -83,6 +107,21 @@ const OnBoarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, { backgroundColor }]}>
+        {slides.map(({ picture }, i) => {
+          const opacity = interpolateNode(x, {
+            inputRange: [(i - 1) * width, i*width, (i + 1) * width],
+            outputRange: [0, 1, 0],
+            extrapolate: Extrapolate.CLAMP
+          })
+          return (
+            <Animated.View style={[styles.underlay, {opacity}]} key={i}>
+              <Image source={picture.uri} style={{
+                width: width - theme.borderRadii.xl,
+                height: ( width - theme.borderRadii.xl ) * picture.height / picture.width
+              }} />
+            </Animated.View>
+          )
+        })}
         <Animated.ScrollView
           ref={scroll}
           horizontal 
