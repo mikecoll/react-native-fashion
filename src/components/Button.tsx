@@ -7,22 +7,23 @@ import { Text } from './Theme';
 interface ButtonProps {
   label: string,
   variant: "default" | "primary" | "transparent",
-  onPress: () => void,
+  onPress?: () => void,
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
   const {
     label,
     variant = "default",
-    onPress
+    onPress,
+    children
   } = props;
   const theme = useTheme();
 
   const backgroundColor = variant === "primary" ? theme.colors.primary : variant === "transparent" ? "transparent" : theme.colors.grey;
-  const color = variant === "primary" ? theme.colors.white : theme.colors.button;
+  const color = variant === "primary" ? theme.colors.white : theme.colors.secondary;
   return (
     <RectButton style={[styles.container, { backgroundColor }]} {...{onPress}}>
-      <Text variant="button" style={{ color }}>{label}</Text>
+      {children ? children: <Text variant="button" style={{ color }}>{label}</Text>}
     </RectButton>
   )
 }

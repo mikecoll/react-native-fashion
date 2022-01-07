@@ -3,10 +3,6 @@ import { Image, Dimensions } from 'react-native';
 import theme, { Box, Text } from '../../components/Theme';
 import {Button} from '../../components';
 
-interface WelcomeProps {
-
-}
-
 const {width} = Dimensions.get("window");
 
 const picture = {
@@ -15,7 +11,7 @@ const picture = {
   height: 5074
 }
 
-const Welcome: React.FC<WelcomeProps> = (props) => {
+const Welcome = ({ navigation }) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box flex={1} borderBottomRightRadius="xl" backgroundColor="grey" alignItems='center' justifyContent="flex-end">
@@ -34,7 +30,11 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
           <Text variant="body" textAlign="center">
             Login to your account below or signup for an amazing experience
           </Text>
-          <Button variant="primary" label="Have an account? Login" />
+          <Button 
+            variant="primary" 
+            label="Have an account? Login" 
+            onPress={() => navigation.navigate("Login")}
+          />
           <Button label="Join us, it's Free" />
           <Button variant="transparent" label="Forget password?" />
         </Box>
