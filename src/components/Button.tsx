@@ -5,7 +5,7 @@ import { useTheme } from '@shopify/restyle';
 import { Text } from './Theme';
 
 interface ButtonProps {
-  label: string,
+  label?: string,
   variant: "default" | "primary" | "transparent",
   onPress?: () => void,
 }
