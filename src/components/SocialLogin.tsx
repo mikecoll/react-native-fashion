@@ -1,9 +1,8 @@
 import React from 'react';
 
 import Svg, { Path } from "react-native-svg"
-import theme, {Box} from './Theme';
+import {Box, useTheme} from './Theme';
 
-const SIZE = theme.borderRadii.l * 2;
 
 function GoogleSVG() {
   return (
@@ -48,6 +47,9 @@ function FaceBookSVG() {
 }
 
 const SocialIcon = ({children}) => {
+  const theme = useTheme();
+  const SIZE = theme.borderRadii.l * 2;
+
   return (
     <Box backgroundColor="white" width={SIZE} height={SIZE} borderRadius="l" justifyContent="center" alignItems="center" marginHorizontal="s">
       {children}

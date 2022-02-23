@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions, StyleSheet, Image, ImageRequireSource } from "react-native";
+import { View, Dimensions, StyleSheet, ImageRequireSource } from "react-native";
 
 import { Text } from '../../components';
 

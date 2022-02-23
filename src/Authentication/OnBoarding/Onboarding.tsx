@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import {View, StyleSheet, Dimensions, Image, ImageStyle} from 'react-native';
 import Animated, {divide, multiply, interpolateNode, Extrapolate} from "react-native-reanimated";
 import {
   interpolateColor,
@@ -9,11 +9,11 @@ import {
 import Slide, {SLIDER_HEIGHT} from "./Slide";
 import SubSlide from "./SubSlide";
 import Dot from './Dot';
-import {theme} from '../../components'
+import {useTheme, makeStyles, Theme} from '../../components/Theme'
 
 const {width} = Dimensions.get("window");
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flex: 1,
     backgroundColor: 'white'
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   }
-})
+}));
 
 const slides = [
   { 
@@ -96,6 +96,8 @@ const slides = [
 ]
 
 const OnBoarding = ({ navigation }) => {
+  const styles = useStyles();
+  const theme = useTheme();
   const { x, scrollHandler } = useScrollHandler();
   const scroll = useRef<Animated.ScrollView>(null);
 

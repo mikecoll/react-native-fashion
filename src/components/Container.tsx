@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, Image, StyleSheet, StatusBar } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import theme, {Box} from './Theme';
+import {Box, useTheme} from './Theme';
 
 const {width} = Dimensions.get("window");
 const aspectRatio = 750 / 1125;
@@ -16,6 +16,7 @@ const Container = ({
   footer,
 }) => {
   const insets = useSafeAreaInsets();
+  const theme = useTheme();
   return (
     <Box flex={1} backgroundColor="secondary">
       <StatusBar barStyle="light-content" />

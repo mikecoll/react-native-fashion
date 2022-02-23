@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Dimensions } from 'react-native';
-import theme, { Box, Text } from '../../components/Theme';
+import { Box, Text, useTheme } from '../../components/Theme';
 import {Button} from '../../components';
 
 const {width} = Dimensions.get("window");
@@ -12,6 +12,7 @@ const picture = {
 }
 
 const Welcome = ({ navigation }) => {
+  const theme = useTheme();
   return (
     <Box flex={1} backgroundColor="white">
       <Box flex={1} borderBottomRightRadius="xl" backgroundColor="grey" alignItems='center' justifyContent="flex-end">
