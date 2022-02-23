@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Feather as Icon } from '@expo/vector-icons';
 import { Box, Text } from '../Theme';
 import { RectButton } from 'react-native-gesture-handler';
 
 interface CheckboxProps {
   label: string;
+  checked: boolean;
+  onChange: () => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label }) => {
-  const [checked, setChecked] = useState(false);
-
+const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange }: CheckboxProps) => {
+  console.log('s', checked);
   return (
-    <RectButton onPress={() => setChecked(c => !c)} style={{ justifyContent: 'center' }}>
+    <RectButton onPress={onChange} style={{ justifyContent: 'center' }}>
       <Box flexDirection="row">
         <Box 
           marginRight="m"

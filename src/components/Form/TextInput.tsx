@@ -5,32 +5,15 @@ import { Feather as Icon } from '@expo/vector-icons';
 
 interface TextInputProps extends RNTextInputProps {
   icon: string;
-  validator?: (input: string) => boolean;
+  touched?: boolean;
+  error?: string;
 }
 
 const SIZE = theme.borderRadii.m * 2;
-const Valid = true;
-const InValid = false;
-const Pristine = null;
-type InputState = typeof Valid | typeof InValid | typeof Pristine;
 
-const TextInput: React.FC<TextInputProps> = ({icon, validator, ...props}) => {
-  const [input, setInput] = useState('');
-  const [state, setState] = useState<InputState>(Pristine);
-  const reColor: keyof typeof theme.colors = state === Pristine ? "text" : (state === Valid ? 'primary' : 'danger');
+const TextInput: React.FC<TextInputProps> = ({icon, touched, error, ...props}) => {
+  const reColor = !touched ? 'text' : ( error ? 'danger' : 'primary');
   const color = theme.colors[reColor];
-  
-  const onChangeText = (text: string) => {
-    setInput(text);
-    if (state !== Pristine) {
-      validate();
-    }
-  };
-  const validate = () => {
-    const valid = validator(input);
-    setState(valid);
-  }
-
 
   return (
     <Box 
@@ -49,22 +32,20 @@ const TextInput: React.FC<TextInputProps> = ({icon, validator, ...props}) => {
         <RNTextInput 
           underlineColorAndroid={'transparent'} 
           placeholderTextColor={color}
-          onBlur={validate}
-          {...{onChangeText}}
           {...props}
         />
       </Box>
       {
-        (state === Valid  || state === InValid) && (
+        (touched) && (
           <Box 
             height={SIZE} 
             width={SIZE} 
             borderRadius='m'
-            backgroundColor={state === Valid ? 'primary' : 'danger'}
+            backgroundColor={!error ? 'primary' : 'danger'}
             justifyContent='center'
             alignItems='center'
           >
-            <Icon name={state === Valid ? 'check' : 'x'} color={'white'} size={16} />
+            <Icon name={!error ? 'check' : 'x'} color={'white'} size={16} />
           </Box>
         )
       }
