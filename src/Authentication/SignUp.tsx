@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import {Container, Text, Button} from '../components';
 import {Box} from '../components/Theme';
 import TextInput from '../components/Form/TextInput';
-import Checkbox from '../components/Form/Checkbox';
 import Footer from '../components/Footer';
 
 const SignUpSchema = Yup.object().shape({

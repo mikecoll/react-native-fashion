@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import {View, StyleSheet, Dimensions, Image, ImageStyle} from 'react-native';
+import {View, StyleSheet, Dimensions, Image} from 'react-native';
 import Animated, {divide, multiply, interpolateNode, Extrapolate} from "react-native-reanimated";
 import {
   interpolateColor,

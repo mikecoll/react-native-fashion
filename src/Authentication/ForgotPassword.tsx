@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import {Container, Text, Button} from '../components';
 import {Box} from '../components/Theme';
 import TextInput from '../components/Form/TextInput';
-import Checkbox from '../components/Form/Checkbox';
 import Footer from '../components/Footer';
 
 const ForgotPasswordSchema = Yup.object().shape({
@@ -22,7 +21,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = (props) => {
 
   const { handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues: { email: '' },
-    onSubmit: (values) => console.log(values),
+    onSubmit: () => navigation.navigate('PasswordChanged'),
     validationSchema: ForgotPasswordSchema,
   });
 
