@@ -9,8 +9,7 @@ interface TextInputProps extends RNTextInputProps {
   error?: string;
 }
 
-
-const TextInput: React.FC<TextInputProps> = forwardRef(({icon, touched, error, ...props}, ref) => {
+const TextInput = forwardRef<RNTextInput, TextInputProps>(({icon, touched, error, ...props}, ref) => {
   const theme = useTheme();
   const SIZE = theme.borderRadii.m * 2;
   const reColor = !touched ? 'text' : ( error ? 'danger' : 'primary');

@@ -69,7 +69,7 @@ const Login: React.FC<{}> = ({navigation}) => {
               checked={values.remember}
               onChange={() => setFieldValue('remember', !values.remember)}
             />
-            <Button variant="transparent" onPress={() => {}}>
+            <Button variant="transparent" onPress={() => navigation.navigate('ForgotPassword')}>
               <Text color="primary">Forgot password</Text>
             </Button>
           </Box>
