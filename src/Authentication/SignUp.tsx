@@ -32,7 +32,7 @@ const SignUp: React.FC<{}> = ({navigation}) => {
 
   return (
     <Container pattern={1} {...{footer}}>
-      <Box padding="xl">
+      <Box padding="xl" flex={1} justifyContent="center">
         <Text variant="title1" textAlign='center' marginBottom='l'>Create Account</Text>
         <Text variant="body" textAlign='center' marginBottom='l'>Let us know what your name, email and your password</Text>
         <Box>

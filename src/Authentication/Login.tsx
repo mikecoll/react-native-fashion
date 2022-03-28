@@ -20,8 +20,8 @@ const LoginSchema = Yup.object().shape({
 
 const Login: React.FC<{}> = ({navigation}) => {
   const { handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
-    initialValues: { email: '', password: '', remember: false },
-    onSubmit: () => navigation.navigate('OutfitIdeas'),
+    initialValues: { email: '12345@qq.com', password: '12345', remember: false },
+    onSubmit: () => navigation.navigate('Home'),
     validationSchema: LoginSchema,
   });
   const password = useRef<typeof TextInput>(null);
@@ -30,7 +30,7 @@ const Login: React.FC<{}> = ({navigation}) => {
 
   return (
     <Container pattern={0} {...{footer}}>
-      <Box padding="xl">
+      <Box padding="xl" flex={1} justifyContent="center">
         <Text variant="title1" textAlign='center' marginBottom='l'>Welcome back</Text>
         <Text variant="body" textAlign='center' marginBottom='l'>Use your credentials below to and login in your account</Text>
         <Box>
