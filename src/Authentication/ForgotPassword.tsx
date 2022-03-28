@@ -27,7 +27,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = (props) => {
 
   const footer = <Footer onPress={() => Linking.openURL('mailto:help@support.com')} title={`Don't work?`} action={`Try another way`} />
   return (
-    <Container {...{footer}}>
+    <Container pattern={2} {...{footer}}>
       <Box padding="xl" flex={1} justifyContent="center">
         <Text variant="title1" textAlign='center' marginBottom='l'>Forgot Password?</Text>
         <Text variant="body" textAlign='center' marginBottom='l'>Enter the email address associated with your account</Text>

@@ -1,32 +1,33 @@
 import React from 'react';
-import { Feather as Icon } from '@expo/vector-icons';
 import {Container, Text, Button} from '../components';
 import {Box} from '../components/Theme';
-import CloseButton from '../components/CloseButton';
+import RoundedIconButton from '../components/RoundedIconButton';
+import RoundedIcon from '../components/RoundedIcon';
 
 const SIZE = 80;
 
 const PasswordChanged = ({navigation}) => {
 
   return (
-    <Container footer={
+    <Container pattern={0} footer={
       <Box alignItems="center">
-        <CloseButton onPress={() => navigation.pop()}/>
+        <RoundedIconButton 
+          onPress={() => navigation.pop()}
+          backgroundColor="white"
+          color="secondary"
+          name="x"
+          size={60}
+        />
       </Box>
     }
     > 
       <Box flex={1} justifyContent="center" alignItems="center">
-        <Box 
-          style={{ height: SIZE, width: SIZE, borderRadius: SIZE/2 }} 
+        <RoundedIcon
+          name="check"
           backgroundColor="primaryLight"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom="xl"
-        >
-          <Text color="primary">
-            <Icon name="check" size={32} /> 
-          </Text>
-        </Box>
+          size={SIZE}
+          color="primary"
+        />
         <Box padding="xl" justifyContent="center">
           <Text variant="title1" textAlign='center' marginBottom='l'>Your password was successfully changed</Text>
           <Text variant="body" textAlign='center' marginBottom='l'>Close this window and Login again</Text>

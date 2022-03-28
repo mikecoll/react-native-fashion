@@ -7,6 +7,7 @@ import {Box} from '../components/Theme';
 import TextInput from '../components/Form/TextInput';
 import Checkbox from '../components/Form/Checkbox';
 import Footer from '../components/Footer';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -20,7 +21,7 @@ const LoginSchema = Yup.object().shape({
 const Login: React.FC<{}> = ({navigation}) => {
   const { handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues: { email: '', password: '', remember: false },
-    onSubmit: (values) => console.log(values),
+    onSubmit: () => navigation.navigate('OutfitIdeas'),
     validationSchema: LoginSchema,
   });
   const password = useRef<typeof TextInput>(null);
@@ -28,7 +29,7 @@ const Login: React.FC<{}> = ({navigation}) => {
   const footer = <Footer onPress={() => navigation.navigate('SignUp')} title={`Don't have an account?`} action={`Sign Up here`} />
 
   return (
-    <Container {...{footer}}>
+    <Container pattern={0} {...{footer}}>
       <Box padding="xl">
         <Text variant="title1" textAlign='center' marginBottom='l'>Welcome back</Text>
         <Text variant="body" textAlign='center' marginBottom='l'>Use your credentials below to and login in your account</Text>
@@ -63,15 +64,15 @@ const Login: React.FC<{}> = ({navigation}) => {
             returnKeyLabel='go'
             onEndEditing={() => handleSubmit()}
           />
-          <Box flexDirection="row" justifyContent="space-between">
+          <Box flexDirection="row" justifyContent="space-between" alignItems="center" marginVertical="s">
             <Checkbox 
               label="Remeber me"
               checked={values.remember}
               onChange={() => setFieldValue('remember', !values.remember)}
             />
-            <Button variant="transparent" onPress={() => navigation.navigate('ForgotPassword')}>
+            <BorderlessButton onPress={() => navigation.navigate('ForgotPassword')}>
               <Text color="primary">Forgot password</Text>
-            </Button>
+            </BorderlessButton>
           </Box>
           <Box alignItems="center" marginTop="m">
             <Button variant="primary" label="Login your account" onPress={handleSubmit}/>

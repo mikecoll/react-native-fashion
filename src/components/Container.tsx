@@ -11,26 +11,36 @@ const height = width * aspectRatio;
 
 export const assets = [
   require("../assets/pattern1.png"),
+  require("../assets/pattern2.png"),
+  require("../assets/pattern3.png"),
 ]
+
+interface ContainerProps {
+  children: React.ReactNode;
+  footer: React.ReactNode;
+  pattern: 0 | 1 | 2;
+}
 
 const Container = ({
   children,
   footer,
-}) => {
+  pattern = 0,
+}: ContainerProps) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const asset = assets[pattern];
   return (
     <KeyboardAwareScrollView scrollEnabled={false}>
       <Box height={wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight : 0)} backgroundColor="secondary">
         <StatusBar barStyle="light-content" />
         <Box backgroundColor="white">
           <Box borderBottomLeftRadius="xl" overflow="hidden" height={height*0.61}>
-            <Image source={assets[0]} style={{ width, height, borderBottomLeftRadius: theme.borderRadii.xl }} />
+            <Image source={asset} style={{ width, height, borderBottomLeftRadius: theme.borderRadii.xl }} />
           </Box>
         </Box>
         <Box flex={1} overflow="hidden">
           <Image 
-            source={assets[0]} 
+            source={asset} 
             style={{ 
               ...StyleSheet.absoluteFillObject,
               width, 

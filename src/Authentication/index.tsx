@@ -9,6 +9,8 @@ import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
 import PasswordChanged from './PasswordChanged';
 
+import HomeNavigation from '../Home';
+
 const AuthenticationStack = createNativeStackNavigator<AppRoutes>();
 export const AuthenticationNavigation = () => {
   return (
@@ -23,6 +25,8 @@ export const AuthenticationNavigation = () => {
       <AuthenticationStack.Screen name="SignUp" component={SignUp} />
       <AuthenticationStack.Screen name="ForgotPassword" component={ForgotPassword} />
       <AuthenticationStack.Screen name="PasswordChanged" component={PasswordChanged} />
+
+      <AuthenticationStack.Screen name="Home" component={HomeNavigation} />
     </AuthenticationStack.Navigator>  
   )
 }

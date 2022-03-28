@@ -31,7 +31,7 @@ const SignUp: React.FC<{}> = ({navigation}) => {
   const footer = <Footer onPress={() => navigation.navigate('Login')} title={`Already have an account`} action={`Login here`} />
 
   return (
-    <Container {...{footer}}>
+    <Container pattern={1} {...{footer}}>
       <Box padding="xl">
         <Text variant="title1" textAlign='center' marginBottom='l'>Create Account</Text>
         <Text variant="body" textAlign='center' marginBottom='l'>Let us know what your name, email and your password</Text>

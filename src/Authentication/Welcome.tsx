@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Dimensions } from 'react-native';
 import { Box, Text, useTheme } from '../components/Theme';
 import {Button} from '../components';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const {width} = Dimensions.get("window");
 
@@ -36,8 +37,10 @@ const Welcome = ({ navigation }) => {
             label="Have an account? Login" 
             onPress={() => navigation.navigate("Login")}
           />
-          <Button label="Join us, it's Free" />
-          <Button variant="transparent" label="Forget password?" />
+          <Button label="Join us, it's Free" onPress={() => navigation.navigate("SignUp")} />
+          <BorderlessButton onPress={() => navigation.navigate("ForgotPassword")}>
+            <Text color="secondary" variant="button">Forget password?</Text>
+          </BorderlessButton>
         </Box>
       </Box>    
     </Box>
