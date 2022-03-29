@@ -1,9 +1,8 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import RoundedIconButton from '../../components/RoundedIconButton';
-import {Box, Text} from '../../components/Theme';
+import {Box, Text, useTheme} from '../../components/Theme';
 import DrawerItem from './DrawerItem';
+import Header from '../../components/Header';
 
 const {width} = Dimensions.get("window");
 export const DRAWER_WIDTH = width * 0.8;
@@ -53,8 +52,8 @@ interface DrawerProps {
 };
 
 const Drawer: React.FC<DrawerProps> = props => {
-  const {} = props;
-  const insets = useSafeAreaInsets();
+  const {navigation} = props;
+  const theme = useTheme();
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor={"white"}>
@@ -66,44 +65,22 @@ const Drawer: React.FC<DrawerProps> = props => {
           right={0} 
           borderBottomRightRadius={"xl"} 
           backgroundColor={"secondary"}
-          flexDirection="row"
-          justifyContent="space-between"
-          paddingHorizontal='m'
-          style={{
-            paddingTop: insets.top
-          }}
         >
-          <RoundedIconButton
-            size={24}
-            name="x"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
-          />
-          <Text color="white">MY PROFILE</Text>
-          <RoundedIconButton
-            size={24}
-            name="shopping-bag"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
+          <Header
+            left={{
+              icon: 'x',
+              onPress: () => navigation.closeDrawer()
+            }}
+            title="my profile"
+            right={{
+              icon: 'shopping-bag',
+              onPress: () => {}
+            }}
           />
         </Box>
       </Box>
       <Box flex={0.8}>
         <Box flex={1} backgroundColor={"secondary"} />
-        <Box flex={1} backgroundColor={"primaryLight"} />
-        <Image 
-          source={require('../../assets/pattern3.png')}
-          style={{
-            position:'absolute',
-            bottom: -height * 0.6,
-            left: 0,
-            right: 0,
-            width: DRAWER_WIDTH,
-            height: height,
-          }}
-        />
         <Box 
           position="absolute" 
           top={0} 
@@ -139,11 +116,12 @@ const Drawer: React.FC<DrawerProps> = props => {
       </Box>
       <Box flex={0.2} backgroundColor={"white"} width={DRAWER_WIDTH} overflow="hidden" height={height * 0.6}>
        <Image 
-          source={require('../../assets/pattern3.png')}
+          source={require('../../assets/drawer.png')}
           style={{
             ...StyleSheet.absoluteFillObject,
-            width: undefined,
-            height: undefined,
+            width: DRAWER_WIDTH,
+            height: height,
+            borderTopLeftRadius: theme.borderRadii.xl
           }}
         />
       </Box>

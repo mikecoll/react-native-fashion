@@ -9,11 +9,13 @@ export const theme = createTheme({
     text: 'rgba(12, 13, 52, 0.7)',
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',
+    lightGrey: '#FAFAFA',
     primaryLight: '#E7F9F7',
-    orange: 'rgba(238,56,37,1)',
+    orange: 'rgba(251,95,61,1)',
     yellow: 'rgba(244,198,45,1)',
     pink: 'rgba(240,141,151,1)',
     violet: 'rgba(64,33,175,1)',
+    lightBlue: '#BFEAF5',
   },
   spacing: {
     s: 8,
@@ -55,6 +57,11 @@ export const theme = createTheme({
       fontSize: 15,
       fontWeight: 'bold',
       color: 'text',
+    },
+    header: {
+      fontSize: 12,
+      lineHeight: 24,
+      color: 'secondary',
     }
   },
   breakpoints: {}
