@@ -10,6 +10,10 @@ export const theme = createTheme({
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',
     primaryLight: '#E7F9F7',
+    orange: 'rgba(238,56,37,1)',
+    yellow: 'rgba(244,198,45,1)',
+    pink: 'rgba(240,141,151,1)',
+    violet: 'rgba(64,33,175,1)',
   },
   spacing: {
     s: 8,
