@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import { Box, useTheme } from '../../components/Theme';
 import Footer from './Footer';
 import Outfit from './Outfit';
+import TopCurve from './TopCurve';
 
 const {width: wWidth} = Dimensions.get("window");
 
@@ -71,10 +72,13 @@ const FavoriteOutfits: React.FC<FavoriteOutfitsProps> = props => {
   const width = (wWidth - theme.spacing.m * 3) / 2;
   const [footerHeight, setFooterHeight] = useState(0);
   const [outfits, setOutfits] = useState(defaultOutfits);
-  const left = useRef(null);
-  const right = useRef(null);
+  const list = useRef(null);
 
-  const transition = <Transition.Change interpolation={'easeInOut'} />
+  const transition = (
+    <Transition.Together>
+      <Transition.Change interpolation={'easeInOut'} durationMs={1000} />
+    </Transition.Together>
+  )
 
   return (
     <Box flex={1} backgroundColor="white">
@@ -95,23 +99,22 @@ const FavoriteOutfits: React.FC<FavoriteOutfitsProps> = props => {
         paddingHorizontal: theme.spacing.m,
         paddingBottom: footerHeight
       }}>       
-        <Box flexDirection="row">
-          <Box marginRight="m">
-            <Transitioning.View ref={left} {...{transition}}>
-            {
-              outfits.filter((_, i) => i % 2 !== 0).map(item => <Outfit key={item.id} outfit={item} width={width} />)
-            }
-            </Transitioning.View>
+        <Transitioning.View ref={list} {...{transition}}>
+          <Box flexDirection="row">
+            <Box marginRight="m">
+              {
+                outfits.filter(({ id }) => id % 2 !== 0).map(item => <Outfit key={item.id} outfit={item} width={width} />)
+              }
+            </Box>
+            <Box>
+              {
+                outfits.filter(({ id }) => id % 2 === 0).map(item => <Outfit key={item.id} outfit={item} width={width}  />)
+              }
+            </Box>
           </Box>
-          <Box>
-            <Transitioning.View ref={right} {...{transition}}>
-            {
-              outfits.filter((_, i) => i % 2 === 0).map(item => <Outfit key={item.id} outfit={item} width={width}  />)
-            }
-            </Transitioning.View>
-          </Box>
-        </Box>
+        </Transitioning.View>
       </ScrollView>
+      <TopCurve footerHeight={footerHeight} />
       <Box 
         position="absolute" 
         bottom={0} 
@@ -128,6 +131,7 @@ const FavoriteOutfits: React.FC<FavoriteOutfitsProps> = props => {
         }}
       >
         <Footer label="Add more to Favorites" onPress={() => {
+          list.current?.animateNextTransition();
           setOutfits(outfits.filter(outfit => !outfit.selected));
         }} />
       </Box>  
