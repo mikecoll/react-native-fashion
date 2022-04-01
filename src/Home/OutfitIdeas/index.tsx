@@ -7,7 +7,7 @@ import {interpolate} from 'react-native-reanimated';
 import {
   useTransition,
 } from "react-native-redash/lib/module/v1";
-import { Alert } from 'react-native';
+import Categories from './Categories';
 
 const cards = [
   {
@@ -52,6 +52,7 @@ const OutfitIdeas: React.FC<OutfitIdeasProps> = props => {
       }}
       dark={false}
     />
+    <Categories />
     <Box flex={1}>
       <Background />
       { cards.map(({index, source}) => {
