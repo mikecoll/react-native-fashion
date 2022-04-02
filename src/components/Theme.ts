@@ -9,6 +9,7 @@ export const theme = createTheme({
     text: 'rgba(12, 13, 52, 0.7)',
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',
+    darkGrey: '#808080',
     lightGrey: '#FAFAFA',
     primaryLight: '#E7F9F7',
     orange: 'rgba(251,95,61,1)',
@@ -45,6 +46,11 @@ export const theme = createTheme({
     title2: {
       fontSize: 24,
       lineHeight: 30,
+      color: 'secondary',
+      fontWeight: 'bold',
+    },
+    title3: {
+      fontSize: 16,
       color: 'secondary',
       fontWeight: 'bold',
     },

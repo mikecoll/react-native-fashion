@@ -1,47 +1,32 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import Header from '../../components/Header';
 import { Box, Text } from '../../components/Theme';
-import Graph from './Graph';
+import Graph, {Point} from './Graph';
+import Transaction from './Transaction';
+const minDate = new Date('2019-09-01').getTime();
+const maxDate = new Date('2020-03-01').getTime();
 
-const data = [
+const data: Point[] = [
   {
-    data: new Date('2019-09-01').getTime(),
-    value: 0,
-    color: 'primary'
-  },
-  {
-    data: new Date('2019-10-01').getTime(),
-    value: 0,
-    color: 'primary'
-  },
-  {
-    data: new Date('2019-11-01').getTime(),
+    date: new Date('2019-11-01').getTime(),
     value: 139.42,
-    color: 'orange'
+    color: 'orange',
+    id: 245673,
   },
   {
-    data: new Date('2019-12-01').getTime(),
+    date: new Date('2019-12-01').getTime(),
     value: 281.23,
-    color: 'yellow'
+    color: 'yellow',
+    id: 245672,
   },
   {
-    data: new Date('2020-01-01').getTime(),
-    value: 0,
-    color: 'primary'
-  },
-  {
-    data: new Date('2020-02-01').getTime(),
+    date: new Date('2020-02-01').getTime(),
     value: 198.54,
-    color: 'pink'
+    color: 'pink',
+    id: 245671,
   },
-  {
-    data: new Date('2020-03-01').getTime(),
-    value: 0,
-    color: 'primary'
-  },
-
 ];
 
 interface TransactionHistoryProps {
@@ -75,8 +60,13 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = props => {
             <Text color='primary'>All Time</Text>
           </Box>
         </Box>
+        <Graph data={data} minDate={minDate} maxDate={maxDate} />
+        <ScrollView>
+          {data.map((transaction, index) => (
+            <Transaction key={index} transaction={transaction} />
+          ))}
+        </ScrollView>
       </Box>
-      <Graph data={data} />
     </Box>
   )
 };
