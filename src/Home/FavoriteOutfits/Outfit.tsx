@@ -32,7 +32,7 @@ const Outfit: React.FC<OutfitProps> = props => {
           height: width * outfit.aspectRatio
         }}
       >
-        {selected && <RoundedIcon name={'check'} backgroundColor="primary" color="white" size={24} />}
+        {selected && <RoundedIcon name={'check'} backgroundColor="primary" color="background" size={24} />}
       </Box>
     </BorderlessButton>
   )

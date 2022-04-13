@@ -19,7 +19,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = props => {
   const {left, title, right, dark = true} = props;
   const insets = useSafeAreaInsets();
-  const color = dark ? "white" : "secondary";
+  const color = dark ? "background" : "secondary";
   const backgroundColor = dark ? "secondary" : "lightGrey";
   return (
     <Box 

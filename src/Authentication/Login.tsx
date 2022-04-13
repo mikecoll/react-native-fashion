@@ -8,6 +8,7 @@ import TextInput from '../components/Form/TextInput';
 import Checkbox from '../components/Form/Checkbox';
 import Footer from '../components/Footer';
 import { BorderlessButton } from 'react-native-gesture-handler';
+import { CommonActions } from '@react-navigation/native';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -21,7 +22,16 @@ const LoginSchema = Yup.object().shape({
 const Login: React.FC<{}> = ({navigation}) => {
   const { handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues: { email: '12345@qq.com', password: '12345', remember: false },
-    onSubmit: () => navigation.navigate('Home'),
+    onSubmit: () => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            { name: 'Home' }
+          ]
+        })
+      );
+    },
     validationSchema: LoginSchema,
   });
   const password = useRef<typeof TextInput>(null);

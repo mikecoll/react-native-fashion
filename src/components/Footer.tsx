@@ -16,7 +16,7 @@ const Footer: React.FC<FooterProps> = (props) => {
       <SocialLogin />
       <Box alignItems="center" marginTop="m">
         <BorderlessButton onPress={onPress}>
-          <Text variant="button" color="white">
+          <Text variant="button" color="background">
             <Text>{`${title} `}</Text>
             <Text color="primary" marginLeft="s">{action}</Text>
           </Text>

@@ -1,5 +1,5 @@
+import moment from 'moment';
 import React from 'react';
-import {View} from 'react-native';
 import { Box, Text } from '../../components/Theme';
 import {Point} from './Graph';
 
@@ -31,7 +31,7 @@ const Transaction: React.FC<TransactionProps> = props => {
           <Text variant="title3">{`#${transaction.id}`}</Text>
         </Box>
         <Box>
-          <Text color="darkGrey">{`$${transaction.value} - ${new Date(transaction.date).toLocaleDateString()}`}</Text>
+          <Text color="darkGrey">{`$${transaction.value} - ${moment(transaction.date).format('DD MMMM, YYYY')}`}</Text>
         </Box>
       </Box>
       <Box>

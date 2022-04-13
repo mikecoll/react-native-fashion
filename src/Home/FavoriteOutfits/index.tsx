@@ -76,12 +76,13 @@ const FavoriteOutfits: React.FC<FavoriteOutfitsProps> = props => {
 
   const transition = (
     <Transition.Together>
-      <Transition.Change interpolation={'easeInOut'} durationMs={1000} />
+      <Transition.Out type="fade" />
+      <Transition.In type="fade" />
     </Transition.Together>
   )
 
   return (
-    <Box flex={1} backgroundColor="white">
+    <Box flex={1} backgroundColor="background">
       <Header
       title="Outfit Ideas"
       left={{

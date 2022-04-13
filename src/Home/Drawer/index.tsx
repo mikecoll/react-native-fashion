@@ -3,11 +3,26 @@ import {Dimensions, Image, StyleSheet} from 'react-native';
 import {Box, Text, useTheme} from '../../components/Theme';
 import DrawerItem from './DrawerItem';
 import Header from '../../components/Header';
+import { CommonActions } from '@react-navigation/native';
 
 const {width} = Dimensions.get("window");
 export const DRAWER_WIDTH = width * 0.8;
 const aspectRatio = 750 / 1125;
 const height = DRAWER_WIDTH * aspectRatio;
+
+interface BaseDrawerItem {
+  icon: string;
+  color: string;
+  label: string;
+}
+interface ScreenDrawerItem extends BaseDrawerItem {
+  screen: string;
+}
+interface OnPressDrawerItem extends BaseDrawerItem {
+  onPress: (navigation: NavigationType) => void;
+}
+
+type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem;
 
 const items = [
   {
@@ -43,7 +58,16 @@ const items = [
   {
     icon: 'log-out',
     label: 'Logout',
-    screen: 'Logout',
+    onPress: (navigation) => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            { name: 'OnBoarding' }
+          ]
+        })
+      );
+    },
     color: 'secondary'
   },
 ]
@@ -56,7 +80,7 @@ const Drawer: React.FC<DrawerProps> = props => {
   const theme = useTheme();
   return (
     <Box flex={1}>
-      <Box flex={0.2} backgroundColor={"white"}>
+      <Box flex={0.2} backgroundColor={"background"}>
         <Box 
           position="absolute" 
           top={0} 
@@ -87,7 +111,7 @@ const Drawer: React.FC<DrawerProps> = props => {
           left={0} 
           bottom={0} 
           right={0} 
-          backgroundColor={"white"} 
+          backgroundColor={"background"} 
           borderTopLeftRadius={"xl"} 
           borderBottomRightRadius={"xl"}
           justifyContent={"center"}
@@ -114,7 +138,7 @@ const Drawer: React.FC<DrawerProps> = props => {
           ))}
         </Box>
       </Box>
-      <Box flex={0.2} backgroundColor={"white"} width={DRAWER_WIDTH} overflow="hidden" height={height * 0.6}>
+      <Box flex={0.2} backgroundColor={"background"} width={DRAWER_WIDTH} overflow="hidden" height={height * 0.6}>
        <Image 
           source={require('../../assets/drawer.png')}
           style={{

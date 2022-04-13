@@ -1,5 +1,14 @@
 import {ViewStyle, TextStyle, ImageStyle} from 'react-native';
-import { createTheme, createText, createBox, useTheme as useReTheme } from '@shopify/restyle'
+import { 
+  createTheme, 
+  createText, 
+  createBox,
+  useTheme as useReTheme, 
+} from '@shopify/restyle'
+
+export const palette = {
+  white: 'white',
+}
 
 export const theme = createTheme({
   colors: {
@@ -7,7 +16,7 @@ export const theme = createTheme({
     secondary: '#0C0D34',
     danger: '#FF0058',
     text: 'rgba(12, 13, 52, 0.7)',
-    white: 'white',
+    background: palette.white,
     grey: 'rgba(12, 13, 52, 0.05)',
     darkGrey: '#808080',
     lightGrey: '#FAFAFA',
@@ -35,7 +44,7 @@ export const theme = createTheme({
     hero: {
       fontWeight: 'bold',
       fontSize: 80,
-      color: 'white',
+      color: 'background',
       textAlign: 'center'
     },
     title1: {
@@ -72,6 +81,7 @@ export const theme = createTheme({
   },
   breakpoints: {}
 });
+
 export type Theme = typeof theme;
 export const Text = createText<Theme>();
 export const Box = createBox<Theme>();

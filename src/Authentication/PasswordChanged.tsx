@@ -13,7 +13,7 @@ const PasswordChanged = ({navigation}) => {
       <Box alignItems="center">
         <RoundedIconButton 
           onPress={() => navigation.pop()}
-          backgroundColor="white"
+          backgroundColor="background"
           color="secondary"
           name="x"
           size={60}

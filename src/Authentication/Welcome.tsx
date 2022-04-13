@@ -15,7 +15,7 @@ const picture = {
 const Welcome = ({ navigation }) => {
   const theme = useTheme();
   return (
-    <Box flex={1} backgroundColor="white">
+    <Box flex={1} backgroundColor="background">
       <Box flex={1} borderBottomRightRadius="xl" backgroundColor="grey" alignItems='center' justifyContent="flex-end">
         <Image source={picture.uri} style={{
             width: width - theme.borderRadii.xl,
@@ -25,7 +25,7 @@ const Welcome = ({ navigation }) => {
       </Box>
       <Box flex={1} borderTopLeftRadius="xl">
         <Box backgroundColor="grey" position='absolute' top={0} left={0} right={0} bottom={0}></Box>
-        <Box backgroundColor="white" borderTopLeftRadius={"xl"} flex={1} justifyContent="space-evenly" alignItems="center" padding="xl">
+        <Box backgroundColor="background" borderTopLeftRadius={"xl"} flex={1} justifyContent="space-evenly" alignItems="center" padding="xl">
           <Text variant="title2">
             Let's get started
           </Text>

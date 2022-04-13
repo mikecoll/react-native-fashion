@@ -33,7 +33,7 @@ const Container = ({
     <KeyboardAwareScrollView scrollEnabled={false}>
       <Box height={wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight : 0)} backgroundColor="secondary">
         <StatusBar barStyle="light-content" />
-        <Box backgroundColor="white">
+        <Box backgroundColor="background">
           <Box borderBottomLeftRadius="xl" overflow="hidden" height={height*0.61}>
             <Image source={asset} style={{ width, height, borderBottomLeftRadius: theme.borderRadii.xl }} />
           </Box>
@@ -48,7 +48,7 @@ const Container = ({
               top: -height*0.61,
             }}
           />
-          <Box flex={1} borderRadius="xl" borderTopLeftRadius={"zero"} backgroundColor='white'>
+          <Box flex={1} borderRadius="xl" borderTopLeftRadius={"zero"} backgroundColor='background'>
             {children}
           </Box>
           <Box backgroundColor="secondary" paddingTop="m">

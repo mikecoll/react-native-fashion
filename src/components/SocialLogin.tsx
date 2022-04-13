@@ -51,7 +51,7 @@ const SocialIcon = ({children}) => {
   const SIZE = theme.borderRadii.l * 2;
 
   return (
-    <Box backgroundColor="white" width={SIZE} height={SIZE} borderRadius="l" justifyContent="center" alignItems="center" marginHorizontal="s">
+    <Box backgroundColor="background" width={SIZE} height={SIZE} borderRadius="l" justifyContent="center" alignItems="center" marginHorizontal="s">
       {children}
     </Box>
   )

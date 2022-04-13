@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = (props) => {
   const theme = useTheme();
 
   const backgroundColor = variant === "primary" ? theme.colors.primary : theme.colors.grey;
-  const color = variant === "primary" ? theme.colors.white : theme.colors.secondary;
+  const color = variant === "primary" ? theme.colors.background : theme.colors.secondary;
   return (
     <RectButton style={[styles.container, { backgroundColor }]} {...{onPress}}>
       <Text variant="button" style={{ color }}>{label}</Text>
