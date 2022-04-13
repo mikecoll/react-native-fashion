@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import {Dimensions, View} from 'react-native';
 import { useTheme, Box } from '../../components/Theme';
 import Underlay from './Underlay';
 import {lerp} from './Scale';
+import { Transition, Transitioning } from 'react-native-reanimated';
 
 const {width: wWidth} = Dimensions.get("window");
 const aspectRatio = 195 / 305;
-
+const transition = (
+  <Transition.Together>
+    <Transition.In type="fade" durationMs={650} interpolation={"easeInOut"} />
+    <Transition.In type="slide-bottom"  durationMs={650} interpolation={"easeInOut"} />
+  </Transition.Together>
+);
 
 export interface Point {
   date: number;
@@ -23,7 +29,13 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = props => {
   const {data, maxDate, minDate} = props;
+  const ref = useRef(null);
   const theme = useTheme();
+
+  useLayoutEffect(() => {
+    ref.current?.animateNextTransition();
+  });
+
   const numberOfMonths = new Date(maxDate - minDate).getMonth();
 
   const canvansWidth = wWidth - theme.spacing.m * 2;
@@ -41,7 +53,11 @@ const Graph: React.FC<GraphProps> = props => {
   return (
     <Box marginTop="xl" paddingBottom='xl' paddingLeft='xl'>
       <Underlay step={step} minX={minDate} maxX={maxDate} minY={minY} maxY={maxY} />
-      <Box width={width} height={height}>
+      <Transitioning.View 
+        style={{ width, height, overflow: 'hidden' }}
+        ref={ref}
+        transition={transition}
+      >
         {
           data.map((point, i) => {
             const left = new Date(point.date - minDate).getMonth();
@@ -78,7 +94,7 @@ const Graph: React.FC<GraphProps> = props => {
             )
           })
         }
-      </Box>
+      </Transitioning.View>
     </Box>
   )
 };
