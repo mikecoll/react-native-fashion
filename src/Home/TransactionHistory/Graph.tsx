@@ -1,18 +1,18 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import {Dimensions, View} from 'react-native';
 import { useTheme, Box } from '../../components/Theme';
 import Underlay from './Underlay';
 import {lerp} from './Scale';
-import { Transition, Transitioning } from 'react-native-reanimated';
+import Animated, { divide, multiply, sub, Transition } from 'react-native-reanimated';
+import { useIsFocused } from '@react-navigation/native';
+import {
+  useTransition,
+} from "react-native-redash/lib/module/v1";
 
 const {width: wWidth} = Dimensions.get("window");
 const aspectRatio = 195 / 305;
-const transition = (
-  <Transition.Together>
-    <Transition.In type="fade" durationMs={650} interpolation={"easeInOut"} />
-    <Transition.In type="slide-bottom"  durationMs={650} interpolation={"easeInOut"} />
-  </Transition.Together>
-);
+
+const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 export interface Point {
   date: number;
@@ -31,10 +31,8 @@ const Graph: React.FC<GraphProps> = props => {
   const {data, maxDate, minDate} = props;
   const ref = useRef(null);
   const theme = useTheme();
-
-  useLayoutEffect(() => {
-    ref.current?.animateNextTransition();
-  });
+  const isFocused = useIsFocused();
+  const transition = useTransition(isFocused, {duration: 650});
 
   const numberOfMonths = new Date(maxDate - minDate).getMonth();
 
@@ -44,7 +42,6 @@ const Graph: React.FC<GraphProps> = props => {
   const height = canvansHeight - theme.spacing.xl;
 
   const values = data.map(p => p.value);
-  const dates = data.map(p => p.date);
 
   const minY = Math.min(...values);
   const maxY = Math.max(...values);
@@ -53,22 +50,31 @@ const Graph: React.FC<GraphProps> = props => {
   return (
     <Box marginTop="xl" paddingBottom='xl' paddingLeft='xl'>
       <Underlay step={step} minX={minDate} maxX={maxDate} minY={minY} maxY={maxY} />
-      <Transitioning.View 
+      <Animated.View 
         style={{ width, height, overflow: 'hidden' }}
-        ref={ref}
-        transition={transition}
       >
         {
           data.map((point, i) => {
             const left = new Date(point.date - minDate).getMonth();
+            const h = lerp(0, height, point.value / maxY);
+            const currentHeight = multiply(h, transition);
+            const translateY = divide(sub(h, currentHeight), 2);
             return (
-              <Box 
+              <AnimatedBox 
                 key={point.date}
                 position={"absolute"}
                 left={left*step}
                 bottom={0}
                 width={step}
-                height={lerp(0, height, point.value / maxY)}
+                height={h}
+                style={{
+                  transform: [{
+                    translateY
+                  },
+                  {
+                    scaleY: transition
+                  }]
+                }}
               >
                 <View style={{
                   position: 'absolute',
@@ -90,11 +96,11 @@ const Graph: React.FC<GraphProps> = props => {
                   backgroundColor: point.color,
                   borderRadius: theme.borderRadii.m,
                 }} />
-              </Box>
+              </AnimatedBox>
             )
           })
         }
-      </Transitioning.View>
+      </Animated.View>
     </Box>
   )
 };
